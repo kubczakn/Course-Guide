@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "Course-Guide",
+    "slug": "Course-Guide",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "Course-Guide"
+}
