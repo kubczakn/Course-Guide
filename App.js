@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 
+const getCourses = require('./courses.js');
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -18,6 +20,12 @@ const styles = StyleSheet.create({
 const App = (props) => {
   const [course, setCourse] = useState();
 
+  const courses = getCourses();
+
+  const pickerItems = courses.map((courseLabel, index) => 
+      <Picker.Item key={index} label={courseLabel} value={courseLabel} />
+  );
+
   return (
     <View style={styles.title}>
       <Text>Michigan Course Difficulty Guide</Text>
@@ -31,8 +39,7 @@ const App = (props) => {
         onValueChange={(itemValue, itemIndex) =>
           setCourse(itemValue)
         }>
-        <Picker.Item label="EECS" value="eecs" />
-        <Picker.Item label="MATH" value="math" />
+        {pickerItems}
       </Picker>
 
       <StatusBar style="auto" />
