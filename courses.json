@@ -7329,6 +7329,5 @@
       { "course": "WRITING 430", "medianGrade": "A" }
     ]
   },
-  { "type": "YIDDISH", "courses": [] },
-  { "type": "", "courses": [] }
+  { "type": "YIDDISH", "courses": [] }
 ]

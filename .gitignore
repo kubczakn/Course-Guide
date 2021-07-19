@@ -5,6 +5,11 @@
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
 
+# Expo
+.expo
+__generated__
+web-build
+
 # Firebase Config
 src/firebase/config.js
 
