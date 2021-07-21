@@ -1,14 +1,18 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList } from 'react-native';
+import { StyleSheet, Text, View, Image, Button, FlatList } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center', 
   },
+  text: {
+    fontSize: 28,
+  },
   title: {
-    
+      fontSize: 24,
+      color: 'white',
   },
   dropDown: {
       flexDirection: 'row',
@@ -21,6 +25,11 @@ const styles = StyleSheet.create({
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
+    backgroundColor: '#00274C'
+  },
+  button: {
+    color: "#A9A9A9",
+    margin: 10,
   }
 });
 
@@ -28,7 +37,7 @@ const styles = StyleSheet.create({
 const Item = ({ course }) => {
   return (
     <View style={styles.item}>
-      <Text>{course}</Text>
+      <Text style={styles.title}>{course}</Text>
     </View>
   );
 };
@@ -49,40 +58,39 @@ const CourseScreen = ( { route, navigation } ) => {
       <Item course={item.course} /> 
   );
 
-  const onGradePress = () => {
+  const onGradeChange = (val) => {
+    setGrade(val);
+    console.log(val);
     setFilteredCourses( () => {
       const res = returnedCourses.filter(function (course) {
-        return course.medianGrade == grade;
+        return course.medianGrade == val;
       });
       return res;
     });
+    
   }
 
-  // TODO: Add links for each item
+  console.log(filteredCourses);
+
+  // TODO: Add links for each item, better variable naming
 
   return (
     <View style={styles.container}>
-      <View style={styles.title}>
-          <Text >View Median Grade for Subject Courses</Text>
+      <View>
+          <Text style={styles.text}>View Median Grade for Subject Courses</Text>
       </View>
       <View style={styles.dropDown}>
         <Picker
-          style={{margin: 10}}
+          style={{margin: 10, width: 100,}}
           selectedValue={grade}
-          onValueChange={(itemValue) =>
-            setGrade(itemValue)
-          }>
+          onValueChange={(itemVal) => onGradeChange(itemVal)}
+          >
           <Picker.Item  label='A' value='A' />
           <Picker.Item  label='A-' value='A-' />
           <Picker.Item  label='B+' value='B+' />
           <Picker.Item  label='B' value='B' />
           <Picker.Item  label='B-' value='B-' />
         </Picker>
-        <TouchableOpacity
-                      style={{margin: 10}}
-                      onPress={() => onGradePress()}>
-                      <Text>Select Grade</Text>
-        </TouchableOpacity>
       </View>
       <FlatList 
         data={filteredCourses}
@@ -91,10 +99,7 @@ const CourseScreen = ( { route, navigation } ) => {
         contentContainerStyle={styles.list}
         numColumns={2}
       />
-{/*       
-      <View>
-        {results}
-      </View> */}
+
       <StatusBar style="auto" />
     </View>
   );

@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import HomeScreen from './src/components/homeScreen'
 import CourseScreen from './src/components/courseScreen';

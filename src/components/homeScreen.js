@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, Button } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import db from '../firebase/config';
 
@@ -11,11 +11,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    // justifyContent: 'center',
   },
   title: {
 
-  }
+  },
+  button: {
+    color: "#A9A9A9",
+    margin: 10,
+  },
 });
 
 const HomeScreen = ( { navigation }) => {
@@ -44,24 +47,26 @@ const HomeScreen = ( { navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={{margin: 10}}>Michigan Course Difficulty Guide</Text>
+      <Text style={{margin: 10, fontSize: 28}}>Michigan Course Difficulty Guide</Text>
       <Image
         source={require('../../img/block-m.png')}
         style={{ width: 200, height: 200, margin: 10}}
       />
 
       <Picker
-        style={{margin: 10}}
+        style={{margin: 10, width: 100, }}
         selectedValue={course}
         onValueChange={(itemValue, itemIndex) =>
           setCourse(itemValue)
         }>
         {pickerItems}
       </Picker>
-      <TouchableOpacity
-                    onPress={() => onCoursePress()}>
-                    <Text>Submit</Text>
-      </TouchableOpacity>
+      <Button
+                    style={styles.button}
+                    color= "#00274C"
+                    onPress={() => onCoursePress()}
+                    title="Select"
+      />
       <StatusBar style="auto" />
     </View>
   );
