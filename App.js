@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import HomeScreen from './src/components/homeScreen'
-import CourseScreen from './src/components/courseScreen';
-
+import SubjectScreen from './src/components/subjectScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -13,7 +12,7 @@ const App = (props) => {
     <NavigationContainer>
     <Stack.Navigator>
       <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="Course" component={CourseScreen} />
+      <Stack.Screen name="Subject" component={SubjectScreen} />
     </Stack.Navigator>
   </NavigationContainer>
   );

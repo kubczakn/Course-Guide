@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
   button: {
     color: "#A9A9A9",
     margin: 10,
+    width: 150,
   },
 });
 
@@ -34,7 +35,7 @@ const HomeScreen = ( { navigation }) => {
         returnedCourses = doc.data().courses;
       }); 
 
-      navigation.navigate('Course',
+      navigation.navigate('Subject',
       {
           returnedCourses: returnedCourses,
       });
@@ -47,14 +48,14 @@ const HomeScreen = ( { navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={{margin: 10, fontSize: 28}}>Michigan Course Difficulty Guide</Text>
+      <Text style={{margin: 10, fontSize: 24}}>Michigan Course Difficulty Guide</Text>
       <Image
         source={require('../../img/block-m.png')}
         style={{ width: 200, height: 200, margin: 10}}
       />
 
       <Picker
-        style={{margin: 10, width: 100, }}
+        style={{margin: 10, width: 200, }}
         selectedValue={course}
         onValueChange={(itemValue, itemIndex) =>
           setCourse(itemValue)

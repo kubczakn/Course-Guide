@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, Button, FlatList } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity , FlatList, Linking } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 
 const styles = StyleSheet.create({
@@ -8,10 +8,10 @@ const styles = StyleSheet.create({
     alignItems: 'center', 
   },
   text: {
-    fontSize: 28,
+    fontSize: 24,
   },
   title: {
-      fontSize: 24,
+      fontSize: 20,
       color: 'white',
   },
   dropDown: {
@@ -23,8 +23,8 @@ const styles = StyleSheet.create({
   },
   item: {
     padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
+    marginVertical: 2,
+    marginHorizontal: 4,
     backgroundColor: '#00274C'
   },
   button: {
@@ -34,15 +34,25 @@ const styles = StyleSheet.create({
 });
 
 
+const onCoursePress = ( { course } ) => {
+  const courseLabel = course.substr(0, course.indexOf(' '))
+  const courseNum = course.substr(course.indexOf(' ') + 1)
+  const url = `https://atlas.ai.umich.edu/course/${courseLabel}%20${courseNum}/`;
+
+  Linking.openURL(url);
+
+}
+
+
 const Item = ({ course }) => {
   return (
-    <View style={styles.item}>
+    <TouchableOpacity style={styles.item} onPress={() => onCoursePress( { course } )}>
       <Text style={styles.title}>{course}</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 
-const CourseScreen = ( { route, navigation } ) => {
+const SubjectScreen = ( { route, navigation } ) => {
   const { returnedCourses } = route.params;
 
   const [grade, setGrade] = useState('A');
@@ -60,7 +70,7 @@ const CourseScreen = ( { route, navigation } ) => {
 
   const onGradeChange = (val) => {
     setGrade(val);
-    console.log(val);
+
     setFilteredCourses( () => {
       const res = returnedCourses.filter(function (course) {
         return course.medianGrade == val;
@@ -70,7 +80,6 @@ const CourseScreen = ( { route, navigation } ) => {
     
   }
 
-  console.log(filteredCourses);
 
   // TODO: Add links for each item, better variable naming
 
@@ -105,5 +114,5 @@ const CourseScreen = ( { route, navigation } ) => {
   );
 }
 
-export default CourseScreen;
+export default SubjectScreen;
 
